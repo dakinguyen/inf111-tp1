@@ -43,7 +43,7 @@ public class ProgrammePrincipal {
 		                                    "\tListe des nombres\n" + 
 				                            "------------\n" + 
 		                                    tabNombre + 
-		                                    "\nNombre d'opérations obligatoires: " +
+		                                    "\nNombre d'opÃ©rations obligatoires: " +
 		                                    nbOperations +
 		                                    "\nLa cible est: " +
 		                                    resultat);
@@ -60,7 +60,7 @@ public class ProgrammePrincipal {
 		
 		do{
 			
-			operateur = JOptionPane.showInputDialog(null, "Entrez un opérateur (+,-,*,/ ou = pour annuler)");
+			operateur = JOptionPane.showInputDialog(null, "Entrez un opÃ©rateur (+,-,*,/ ou = pour annuler)");
 			
 		}while(!operateur.contentEquals("+") && !operateur.contentEquals("-") && !operateur.contentEquals("*") && !operateur.contentEquals("/") && !operateur.contentEquals("="));
 		
@@ -74,11 +74,11 @@ public class ProgrammePrincipal {
 	public static void afficherEntete(){
 		
 		JOptionPane.showMessageDialog(null, 
-										"Le jeu consiste à trouver une valeur cible en utilisant un nombre d'opérations fixé à l'avance et une liste de nombres fournie.\n\n\n" +
-										"-Un nombre peut se répéter dans la liste fournie + \n" +
-										"-Les seules opérations permises sont: + - * et /\n" +
-										"-Un nombre de la liste ne peut être utilisé qu'une fois dans la solution\n" +
-										"-En tout temps la valeur -1 annule l'opération en cours");
+										"Le jeu consiste Ã  trouver une valeur cible en utilisant un nombre d'opÃ©rations fixÃ© Ã  l'avance et une liste de nombres fournie.\n\n\n" +
+										"-Un nombre peut se rÃ©pÃ©ter dans la liste fournie + \n" +
+										"-Les seules opÃ©rations permises sont: + - * et /\n" +
+										"-Un nombre de la liste ne peut Ãªtre utilisÃ© qu'une fois dans la solution\n" +
+										"-En tout temps la valeur -1 annule l'opÃ©ration en cours");
 		
 	}
 	
