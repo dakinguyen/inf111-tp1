@@ -16,7 +16,7 @@ public class functions {
 
         for (int i=0; i < tab_num.length; i++) {
             tab_num[i] = new Nombre();
-            tab_num[i].nombre = rand.nextInt(10);
+            tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,10);
             tab_num[i].choisi = false;
             System.out.println(tab_num[i].nombre);
         }
@@ -39,14 +39,14 @@ public class functions {
 
     public static char operateurHasard(){
         char[] operators = {'+', '-', '*', '/'};
-        char ops = operators[rand.nextInt(operators.length)];
+        char ops = operators[UtilitaireFonctionsMath.alea(0,3)];
         System.out.println(ops);
         return  ops;
     }
 
     public static int nombreChoisiHasard(Nombre[] tab_num) {
 
-        int nombre = tab_num[rand.nextInt(tab_num.length)].nombre;
+        int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length)].nombre;
         System.out.println(nombre);
         return nombre;
     }
