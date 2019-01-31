@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Random;
 /**
  * 
  * @author daki
@@ -13,10 +12,6 @@ public class ProgrammePrincipal {
 	public static final int TAILLE_NOMBRE = 6;
 	
 	public static void main(String[] args) {
-		
-		int[] Number = {4, 7, 9, 5, 10, 10};
-		
-		nombreValideClavier(Number);
 		
 	}
 	
@@ -69,20 +64,20 @@ public class ProgrammePrincipal {
 		return taille;
 	}
 	
-	public static String tabToString(int[] Nombre) {
+	public static String tabToString(Nombre[] tab_num) {
 		
 		char[] copyNombre = new char[40];
 		int curseur = 0;
 		copyNombre[curseur] = '{';
 		curseur += 1;
-		for (int i = 0; i < Nombre.length; i++) {
-			if (Nombre[i] == 10) {
+		for (int i = 0; i < tab_num.length; i++) {
+			if (tab_num[i].nombre == 10) {
 				copyNombre[curseur] = (char)(ASCII_ENTIER + 1);
 				copyNombre[curseur + 1] = (char)(ASCII_ENTIER + 0);
 				copyNombre[curseur + 2] = ' ';
 				curseur += 3;
-			} else if (Nombre[i] < 10) {
-				copyNombre[curseur] = (char) (ASCII_ENTIER + Nombre[i]);
+			} else if (tab_num[i].nombre < 10) {
+				copyNombre[curseur] = (char) (ASCII_ENTIER + tab_num[i].nombre);
 				copyNombre[curseur + 1] = ' ';
 				curseur += 2;
 			}
@@ -90,13 +85,13 @@ public class ProgrammePrincipal {
 		copyNombre[curseur - 1] = '}';
 		return new String(copyNombre, 0, curseur);
 	}
-	public static int nombreValideClavier(int[] Nombre) {
+	public static int nombreValideClavier(Nombre[] tab_num) {
 		
 		int valide = 0;
 		int nombreEntree = 0;
 		
 		while (valide == 0) {
-			System.out.print("Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(Nombre));
+			System.out.print("Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num));
 			nombreEntree = clavier.nextInt();
 			
 			if (nombreEntree == -1) {
@@ -104,8 +99,8 @@ public class ProgrammePrincipal {
 			}
 			
 			for (int i = 0; i < TAILLE_NOMBRE; i++) {
-				if (nombreEntree == Nombre[i].nombre) {
-					if (Nombre[i].choisi == 0) {
+				if (nombreEntree == tab_num[i].nombre) {
+					if (tab_num[i].choisi == false) {
 						valide = 1;
 					}
 				}
