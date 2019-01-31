@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 
-public class fonc1_6 {
+public class fonc_gab {
 
     static Scanner scanner = new Scanner(System.in);
     static JFrame frame = new JFrame();
@@ -126,6 +126,7 @@ public class fonc1_6 {
         for (int i=0; i < tab_num.length; i++) {
             if (nombre == tab_num[i].nombre) {
                 tab_num[i].choisi = true;
+                i = tab_num.length;
             }
         }
     }
