@@ -160,12 +160,8 @@ public class functions {
                 valide = 1;
             }
 
-            for (int i = 0; i < TAILLE_NOMBRE; i++) {
-                if (nombreEntree == tab_num[i].nombre) {
-                    if (tab_num[i].choisi == false) {
-                        valide = 1;
-                    }
-                }
+            if(nombreExiste(nombreEntree, tab_num)){
+                valide = 1;
             }
         }
 
@@ -276,6 +272,37 @@ public class functions {
         }while(!choix.contentEquals("o") && !choix.contentEquals("n"));
 
         return choix.charAt(0);
+
+    }
+
+    public static int obtenirResultatValide(Nombre[] tab_num) {
+        initBoolen(tab_num);
+        int resultat = nombreValideClavier(tab_num);
+
+        if (resultat != -1) {
+            ajusterNombreChoisi(resultat, tab_num);
+        }
+
+        while (resultat !=-1) {
+            char operator = operateurValideClavier();
+
+            if (operator != '=') {
+                int deuxieme = nombreValideClavier(tab_num);
+
+                if (deuxieme != -1) {
+                    ajusterNombreChoisi(deuxieme, tab_num);
+                    resultat = resultatOperation(resultat, operator, deuxieme);
+                } else {
+                    resultat = -1;
+                }
+            } else {
+                resultat = -1;
+            }
+
+
+        }
+
+        return resultat;
 
     }
 }
