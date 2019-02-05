@@ -275,15 +275,17 @@ public class functions {
 
     }
 
-    public static int obtenirResultatValide(Nombre[] tab_num) {
+    public static int obtenirResultatValide(Nombre[] tab_num, int nb_operations) {
         initBoolen(tab_num);
+        int iterator = 0;
+
         int resultat = nombreValideClavier(tab_num);
 
         if (resultat != -1) {
             ajusterNombreChoisi(resultat, tab_num);
         }
 
-        while (resultat !=-1) {
+        while (resultat !=-1 && iterator < nb_operations) {
             char operator = operateurValideClavier();
 
             if (operator != '=') {
@@ -295,6 +297,7 @@ public class functions {
                 } else {
                     resultat = -1;
                 }
+                iterator++;
             } else {
                 resultat = -1;
             }
