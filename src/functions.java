@@ -11,18 +11,25 @@ public class functions {
     private static Random rand = new Random(System.currentTimeMillis());
     public static final int ASCII_ENTIER = 48;
 
-
+    /**
+     * Initatilise un tableau de monbre pris en parametre avec des chiffres au hasard entre 1 et 9
+     * @param tab_num le tableau de Nombres
+     */
     public static void genererNombres(Nombre[] tab_num) {
 
         for (int i=0; i < tab_num.length; i++) {
             tab_num[i] = new Nombre();
             tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,10);
             tab_num[i].choisi = false;
-            JOptionPane.showMessageDialog(null, tab_num[i].nombre);
+
         }
 
     }
 
+    /**
+     * Initialise un tableau de char avec des espaces vides pour tout le tableau
+     * @param exp le tabeau de char
+     */
     public static void initExpression(char[] exp) {
 
         for (int i=0; i < exp.length; i++) {
@@ -30,6 +37,10 @@ public class functions {
         }
     }
 
+    /**
+     * Initialise tout les booleans du tableau de nombre a false
+     * @param tab_num le tableau de Nombres
+     */
     public static void initBoolen(Nombre[] tab_num) {
 
         for (int i=0; i < tab_num.length; i++) {
@@ -37,17 +48,24 @@ public class functions {
         }
     }
 
+    /**
+     * Retourne un operateur au hasard
+     * @return le char de l'operateur
+     */
     public static char operateurHasard(){
         char[] operators = {'+', '-', '*', '/'};
         char ops = operators[UtilitaireFonctionsMath.alea(0,3)];
-        JOptionPane.showMessageDialog(null, ops);
         return  ops;
     }
 
+    /**
+     * Retourne un nombre int au hasard du tableau de Nombres
+     * @param tab_num le tableau de Nombres
+     * @return la valeur int du nombre
+     */
     public static int nombreChoisiHasard(Nombre[] tab_num) {
 
         int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length)].nombre;
-        JOptionPane.showMessageDialog(null, nombre);
         return nombre;
     }
 
@@ -310,8 +328,8 @@ public class functions {
 
     }
     
-    
-    
+
+
     //Sous-programme de haut niveau
     public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression) {
     int resultat  = 0;
