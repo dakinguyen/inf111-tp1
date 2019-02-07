@@ -8,6 +8,8 @@ public class functions {
     static JFrame frame = new JFrame();
     public static final int TAILLE_CHAR = 20;
     public static final int TAILLE_NOMBRE = 6;
+    public static final int QUITTER = -1;
+    public static final int MATH_ERROR = -2;
     private static Random rand = new Random(System.currentTimeMillis());
     public static final int ASCII_ENTIER = 48;
 
@@ -19,11 +21,9 @@ public class functions {
 
         for (int i=0; i < tab_num.length; i++) {
             tab_num[i] = new Nombre();
-            tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,10);
+            tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,9);
             tab_num[i].choisi = false;
-
         }
-
     }
 
     /**
@@ -65,10 +65,16 @@ public class functions {
      */
     public static int nombreChoisiHasard(Nombre[] tab_num) {
 
-        int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length)].nombre;
+        int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length - 1)].nombre;
         return nombre;
     }
 
+    /**
+     * Il faut verifier si le nombre appartient au tableau et n'a pas encore ete choisi
+     * @param nombre : nombre compare au tableau
+     * @param tab_num : Tableau de nombres
+     * @return : vrai si le nombre n'a pas encore ete choisi et est dans le tableau, false dans au moins un des cas echeant
+     */
     public static boolean nombreExiste(int nombre, Nombre[] tab_num) {
 
         for (int j = 0; j < tab_num.length; j++) {
@@ -79,6 +85,13 @@ public class functions {
         return false;
     }
 
+    /**
+     * Cette fonction fait le calcul et retourne le resultat de l'operation
+     * @param nbChoisi1 : Premier nombre du calcul
+     * @param operation : Operation choisie, et retourne -1 si jamais le resultat de la division ne donne pas un entier
+     * @param nbChoisi2 : Deuxieme nombre du calcul
+     * @return : Retourne le resultat
+     */
     public static int resultatOperation(int nbChoisi1, char operation, int nbChoisi2) {
 
         int resultat;
@@ -87,19 +100,27 @@ public class functions {
             case '+': resultat = nbChoisi1 + nbChoisi2;
                 break;
             case '-': resultat = nbChoisi1 - nbChoisi2;
+                if (resultat < 0) {
+                    return MATH_ERROR;
+                }
                 break;
             case '*': resultat = nbChoisi1 * nbChoisi2;
                 break;
             case '/': resultat = nbChoisi1 / nbChoisi2;
                 if (nbChoisi1 % nbChoisi2 != 0)
-                    return -1;
+                    return MATH_ERROR;
                 break;
-            default: resultat = -1;
+            default: resultat = MATH_ERROR;
         }
 
         return resultat;
     }
 
+    /**
+     * La fonction permet de trouver le nombre choisi dans le tableau et tourne son booleen a vrai
+     * @param nombre : Compare le nombre au tableau
+     * @param tab_num : Tableau de nombres
+     */
     public static void ajusterNombreChoisi (int nombre, Nombre[] tab_num) {
 
         for (int i = 0; i < tab_num.length; i ++) {
@@ -111,6 +132,11 @@ public class functions {
 
     }
 
+    /**
+     * La fonction retourne un nombre du tableau qui n'a pas encore ete choisi
+     * @param tab_num : Tableau de nombre
+     * @return : Retourne le nombre mentionne precedemment
+     */
     public static int nombrePasDejaChoisi (Nombre[] tab_num) {
         boolean choisi;
         int nombre = 0;
@@ -137,22 +163,20 @@ public class functions {
 
     public static int creerExpression(char[] expression, int taille, int operande1, char operateur, int operande2, int resultat) {
 
-        expression[taille] = (char)(ASCII_ENTIER + operande1);
-        expression[taille+1] = ' ';
-        expression[taille+2] = operateur;
-        expression[taille+3] = ' ';
-        expression[taille+4] = (char)(ASCII_ENTIER + operande2);
-        expression[taille+5] = ' ';
-        expression[taille+6] = '=';
-        expression[taille+7] = ' ';
-        String res = Integer.toString(resultat);
-        for (int i=0; i< res.length(); i++) {
-            expression[taille+7+i]= res.charAt(i);
+        String op1 = "";
+        op1 = String.valueOf(operande1);
+        String op2 = "";
+        op2 = String.valueOf(operande2);
+        String operateurS = "";
+        operateurS = String.valueOf(operateur);
+        String resultatStr = "";
+        resultatStr = String.valueOf(resultat);
+        String expReturn = op1 + " " + operateurS + " " + op2 + " = " + resultatStr + " ";
+
+        for (int i = 0; i < expReturn.length(); i ++) {
+            expression[taille + i] = expReturn.charAt(i);
         }
-
-        expression[taille + 8 + res.length()] = ' ';
-        taille += taille + 8 + res.length();
-
+        taille = taille + expReturn.length();
         return taille;
     }
 
@@ -172,10 +196,11 @@ public class functions {
         int nombreEntree = 0;
 
         while (valide == 0) {
-            JOptionPane.showMessageDialog(null, "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num));
-            nombreEntree = scanner.nextInt();
+            nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,
+                    "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " +
+                            tabToString(tab_num)));
 
-            if (nombreEntree == -1) {
+            if (nombreEntree == QUITTER) {
                 valide = 1;
             }
 
@@ -187,6 +212,15 @@ public class functions {
         return nombreEntree;
     }
 
+
+    /**
+     * Afficher la présentation du problème à résoudre
+     *
+     * @param nombre, tableau de nombres
+     * @param nbOperations, le nombre d'opérations obligatoires
+     * @param resultat, la valeur cible à obtenir
+     * @return aucun
+     */
     public static void afficherNombres(Nombre[] nombre, int nbOperations, int resultat){
 
         String tabNombre = "";
@@ -209,9 +243,11 @@ public class functions {
 
     }
 
+
     /**
+     * Gère la fenêtre demandant à l'utilisateur d'entrer un opérateur et valide l'opérateur entré
      *
-     * @return operateur
+     * @return L'opérateur entré par l'utilisateur
      */
     public static char operateurValideClavier(){
 
@@ -228,7 +264,9 @@ public class functions {
 
 
     /**
+     * Affiche la fenêtre d'accueil
      *
+     * @return aucun
      */
     public static void afficherEntete(){
 
@@ -243,8 +281,10 @@ public class functions {
 
 
     /**
+     * Affiche l'expression de la solution dans une fenêtre
      *
-     * @param expression
+     * @param expression, le tableau de caractères contenant l'expression de la solution
+     * @return aucun
      */
     public static void afficherExpression(char[] expression ){
 
@@ -277,9 +317,11 @@ public class functions {
 
     }
 
+
     /**
+     *Gère la fenêtre demandant à l'utilisateur s'il veut rejouer une partie
      *
-     * @return choix
+     * @return le choix de l'utilisateur (s'il veut rejouer ou non)
      */
     public static char veutRejouer(){
 
@@ -287,6 +329,7 @@ public class functions {
 
         do{
             choix = JOptionPane.showInputDialog(null, "Voulez vous rejouer une partie?");
+            choix.toLowerCase();
 
         }while(!choix.contentEquals("o") && !choix.contentEquals("n"));
 
@@ -294,60 +337,107 @@ public class functions {
 
     }
 
+    /**
+     * Interagit avec l'utilisateur lorsqu'il effectue ses operations et quitte lorsqu'il le demande
+     * @param tab_num tableau de Nombres
+     * @param nb_operations le nombre d'operation max a effectuer
+     * @return le resultat des operations
+     */
     public static int obtenirResultatValide(Nombre[] tab_num, int nb_operations) {
         initBoolen(tab_num);
         int iterator = 0;
 
-        int resultat = nombreValideClavier(tab_num);
 
-        if (resultat != -1) {
+        int resultat = nombreValideClavier(tab_num);
+        System.out.println("3");
+
+        if (resultat != QUITTER) {
             ajusterNombreChoisi(resultat, tab_num);
         }
 
-        while (resultat !=-1 && iterator < nb_operations) {
+        while (resultat !=QUITTER && iterator < nb_operations) {
             char operator = operateurValideClavier();
 
             if (operator != '=') {
-                int deuxieme = nombreValideClavier(tab_num);
+                do {
+                    int deuxieme = nombreValideClavier(tab_num);
 
-                if (deuxieme != -1) {
-                    ajusterNombreChoisi(deuxieme, tab_num);
-                    resultat = resultatOperation(resultat, operator, deuxieme);
-                } else {
-                    resultat = -1;
-                }
+                    if (deuxieme != QUITTER) {
+                        ajusterNombreChoisi(deuxieme, tab_num);
+                        resultat = resultatOperation(resultat, operator, deuxieme);
+                    } else {
+                        resultat = QUITTER;
+                    }
+                } while (resultat == MATH_ERROR);
                 iterator++;
             } else {
-                resultat = -1;
+                resultat = QUITTER;
             }
-
-
         }
-
         return resultat;
-
     }
-    
 
 
-    //Sous-programme de haut niveau
+
+    /**
+     * Cette fonction permet de jouer un tour, verifie si le nombre est valide et ce, tant que l'utilisateur ne trouve pas le bon resultat. Tant que l'utilisateur ne trouve pas le bon resultat, le jeu affiche un message d'echec, il affiche un message de reussite une fois le resultat trouve
+     * @param tab : Affiche le tableau de nombres
+     * @param nbOperation : Affiche le nombre d'operations
+     * @param cible : Affiche la cible (le resultat a obtenir)
+     * @param expression : Affiche l'expression du resultat une fois la cible attente
+     */
     public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression) {
-    int resultat  = 0;
-    
-    	do {
-    		afficherEntete();
-    	
-    		afficherNombres(tab, nbOperation, cible);
-    	
-    		resultat = obtenirResultatValide(tab, nbOperation);
-    	
-    	if (resultat == cible)
-    		JOptionPane.showMessageDialog(null, "Bravo !");
-    	else 
-    		JOptionPane.showMessageDialog(null, "Ce n'est pas le bon resultat");
-    	
-    	} while (resultat != -1 || resultat != cible);
-    	
-    	afficherExpression(expression);
+        int resultat  = 0;
+        do {
+            afficherEntete();
+            afficherNombres(tab, nbOperation, cible);
+            resultat = obtenirResultatValide(tab, nbOperation);
+
+
+            if (resultat == cible) {
+                JOptionPane.showMessageDialog(null, "Bravo !");
+            }else {
+                JOptionPane.showMessageDialog(null, "Ce n'est pas le bon resultat");
+            }
+        } while (resultat != QUITTER || resultat != cible);
+
+        afficherExpression(expression);
+    }
+
+
+    public static int trouverCible(Nombre[] tab_num, int nbOperation, char[] expression) {
+        int cible;
+        int nombre_2;
+        int compteurOperation = 0;
+        char operateur;
+        int resultat;
+        int taille = 0;
+
+        cible = functions.nombreChoisiHasard(tab_num);
+        functions.ajusterNombreChoisi(cible, tab_num);
+
+
+        // Choisir le 2e nombre, pas encore choisi
+        nombre_2 = functions.nombrePasDejaChoisi(tab_num);
+        functions.ajusterNombreChoisi(nombre_2, tab_num);
+
+
+        while (compteurOperation < nbOperation) {
+            operateur = functions.operateurHasard();
+            resultat = functions.resultatOperation(cible, operateur, nombre_2);
+
+            if (resultat!= MATH_ERROR) {
+                taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
+                cible = resultat;
+
+                if (compteurOperation < nbOperation) {
+                    nombre_2 = functions.nombrePasDejaChoisi(tab_num);
+                    functions.ajusterNombreChoisi(nombre_2, tab_num);
+                }
+
+                compteurOperation ++;
+            }
+        }
+        return cible;
     }
 }
