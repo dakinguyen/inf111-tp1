@@ -12,14 +12,14 @@ public class functions {
     public static final int ASCII_ENTIER = 48;
 
     /**
-     * Initatilise un tableau de monbre pris en parametre avec des chiffres au hasard entre 1 et 10
+     * Initatilise un tableau de monbre pris en parametre avec des chiffres au hasard entre 1 et 9
      * @param tab_num le tableau de Nombres
      */
     public static void genererNombres(Nombre[] tab_num) {
 
         for (int i=0; i < tab_num.length; i++) {
             tab_num[i] = new Nombre();
-            tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,10);
+            tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,9);
             tab_num[i].choisi = false;
 
         }
