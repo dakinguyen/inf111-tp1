@@ -68,10 +68,10 @@ public class functions {
     }
     
     /**
-     * Fontion qui indique si un nombre du tableau n'a pas encore ete choisi
-     * @param nombre : Il faut verifier si le nombre appartient au tableau et n'a pas encore ete choisi
-     * @param tab_num : Parcours le tableau pour trouve le nombre et savoir s'il a deja choisi, il met ensuite son boolean a vrai s'il est du tableau et n'a pas deja ete choisi
-     * @return : La fonction met le boolean du nombre a vrai s'il est dans le tableau et n'a pas encore ete choisi
+     * Il faut verifier si le nombre appartient au tableau et n'a pas encore ete choisi
+     * @param nombre : nombre compare au tableau
+     * @param tab_num : Tableau de nombres
+     * @return : vrai si le nombre n'a pas encore ete choisi et est dans le tableau, false dans un des cas echeant
      */
     public static boolean nombreExiste(int nombre, Nombre[] tab_num) {
 
@@ -85,10 +85,10 @@ public class functions {
 
     /**
      * Cette fonction fait le calcul et retourne le resultat de l'operation
-     * @param nbChoisi1 : La fonction fait le calcul choisi par le joueur du nombre 1 avec le nombre 2
-     * @param operation : La focntion fait le calcul en focntion de l'operation choisie et retourne -1 si jamais le resultat de la division ne donne pas un entier
-     * @param nbChoisi2 : La fonction fait le calcul choisi par le joueur du nombre 1 avec le nombre 2
-     * @return : la fonction retourne le resultat
+     * @param nbChoisi1 : Premier nombre du calcul
+     * @param operation : Operation choisie, et retourne -1 si jamais le resultat de la division ne donne pas un entier
+     * @param nbChoisi2 : Deuxieme nombre du calcul
+     * @return : Retourne le resultat
      */
     public static int resultatOperation(int nbChoisi1, char operation, int nbChoisi2) {
 
@@ -112,9 +112,9 @@ public class functions {
     }
 
     /**
-     * La fonction permet de trouver le nombre choisi dans le tableau et tourne son boolean a true
-     * @param nombre : Verifie si le nombre appartient au tableau et si son booleen est faux
-     * @param tab_num : La fonction parcours le tableau pour trouver le nombre dont le booleen est faux et le tourne a vrai
+     * La fonction permet de trouver le nombre choisi dans le tableau et tourne son booleen a vrai
+     * @param nombre : Compare le nombre au tableau
+     * @param tab_num : Tableau de nombres
      */
     public static void ajusterNombreChoisi (int nombre, Nombre[] tab_num) {
 
@@ -129,7 +129,7 @@ public class functions {
 
     /**
      * La fonction retourne un nombre du tableau qui n'a pas encore ete choisi
-     * @param tab_num : La fonction cherche un nombre du tableau qui n'a pas encore ete choisi
+     * @param tab_num : Tableau de nombre
      * @return : Retourne le nombre mentionne precedemment
      */
     public static int nombrePasDejaChoisi (Nombre[] tab_num) {
