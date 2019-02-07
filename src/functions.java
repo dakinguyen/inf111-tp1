@@ -330,14 +330,16 @@ public class functions {
             char operator = operateurValideClavier();
 
             if (operator != '=') {
-                int deuxieme = nombreValideClavier(tab_num);
+                do {
+                    int deuxieme = nombreValideClavier(tab_num);
 
-                if (deuxieme != -1) {
-                    ajusterNombreChoisi(deuxieme, tab_num);
-                    resultat = resultatOperation(resultat, operator, deuxieme);
-                } else {
-                    resultat = -1;
-                }
+                    if (deuxieme != -1) {
+                        ajusterNombreChoisi(deuxieme, tab_num);
+                        resultat = resultatOperation(resultat, operator, deuxieme);
+                    } else {
+                        resultat = -1;
+                    }
+                } while (resultat == -2);
                 iterator++;
             } else {
                 resultat = -1;
