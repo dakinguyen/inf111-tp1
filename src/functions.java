@@ -71,7 +71,7 @@ public class functions {
      * Il faut verifier si le nombre appartient au tableau et n'a pas encore ete choisi
      * @param nombre : nombre compare au tableau
      * @param tab_num : Tableau de nombres
-     * @return : vrai si le nombre n'a pas encore ete choisi et est dans le tableau, false dans un des cas echeant
+     * @return : vrai si le nombre n'a pas encore ete choisi et est dans le tableau, false dans au moins un des cas echeant
      */
     public static boolean nombreExiste(int nombre, Nombre[] tab_num) {
 
