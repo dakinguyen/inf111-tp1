@@ -12,6 +12,8 @@ public class functions {
     public static final int MATH_ERROR = -2;
     private static Random rand = new Random(System.currentTimeMillis());
     public static final int ASCII_ENTIER = 48;
+    public static final String OUI = "o";
+    public static final String NON = "n";
 
     /**
      * Initatilise un tableau de monbre pris en parametre avec des chiffres au hasard entre 1 et 9
@@ -196,9 +198,7 @@ public class functions {
         int nombreEntree = 0;
 
         while (valide == 0) {
-            nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,
-                    "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " +
-                            tabToString(tab_num)));
+            nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,"Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " +tabToString(tab_num))).intValue();
 
             if (nombreEntree == QUITTER) {
                 valide = 1;
@@ -214,11 +214,11 @@ public class functions {
 
 
     /**
-     * Afficher la présentation du problème à résoudre
+     * Afficher la prÃ©sentation du problÃ¨me Ã  rÃ©soudre
      *
      * @param nombre, tableau de nombres
-     * @param nbOperations, le nombre d'opérations obligatoires
-     * @param resultat, la valeur cible à obtenir
+     * @param nbOperations, le nombre d'opÃ©rations obligatoires
+     * @param resultat, la valeur cible Ã  obtenir
      * @return aucun
      */
     public static void afficherNombres(Nombre[] nombre, int nbOperations, int resultat){
@@ -236,7 +236,7 @@ public class functions {
                         "\tListe des nombres\n" +
                         "------------\n" +
                         tabNombre +
-                        "\nNombre d'opérations obligatoires: " +
+                        "\nNombre d'opÃ©rations obligatoires: " +
                         nbOperations +
                         "\nLa cible est: " +
                         resultat);
@@ -245,9 +245,9 @@ public class functions {
 
 
     /**
-     * Gère la fenêtre demandant à l'utilisateur d'entrer un opérateur et valide l'opérateur entré
+     * GÃ¨re la fenÃªtre demandant Ã  l'utilisateur d'entrer un opÃ©rateur et valide l'opÃ©rateur entrÃ©
      *
-     * @return L'opérateur entré par l'utilisateur
+     * @return L'opÃ©rateur entrÃ© par l'utilisateur
      */
     public static char operateurValideClavier(){
 
@@ -255,7 +255,7 @@ public class functions {
 
         do{
 
-            operateur = JOptionPane.showInputDialog(null, "Entrez un opérateur (+,-,*,/ ou = pour annuler)");
+            operateur = JOptionPane.showInputDialog(null, "Entrez un opÃ©rateur (+,-,*,/ ou = pour annuler)");
 
         }while(!operateur.contentEquals("+") && !operateur.contentEquals("-") && !operateur.contentEquals("*") && !operateur.contentEquals("/") && !operateur.contentEquals("="));
 
@@ -264,34 +264,35 @@ public class functions {
 
 
     /**
-     * Affiche la fenêtre d'accueil
+     * Affiche la fenÃªtre d'accueil
      *
      * @return aucun
      */
     public static void afficherEntete(){
 
         JOptionPane.showMessageDialog(null,
-                "Le jeu consiste à trouver une valeur cible en utilisant un nombre d'opérations fixé à l'avance et une liste de nombres fournie.\n\n\n" +
-                        "-Un nombre peut se répéter dans la liste fournie + \n" +
-                        "-Les seules opérations permises sont: + - * et /\n" +
-                        "-Un nombre de la liste ne peut être utilisé qu'une fois dans la solution\n" +
-                        "-En tout temps la valeur -1 annule l'opération en cours");
+                "Le jeu consiste Ã  trouver une valeur cible en utilisant un nombre d'opÃ©rations fixÃ© Ã  l'avance et une liste de nombres fournie.\n\n\n" +
+                        "-Un nombre peut se rÃ©pÃ©ter dans la liste fournie + \n" +
+                        "-Les seules opÃ©rations permises sont: + - * et /\n" +
+                        "-Un nombre de la liste ne peut Ãªtre utilisÃ© qu'une fois dans la solution\n" +
+                        "-En tout temps la valeur -1 annule l'opÃ©ration en cours");
 
     }
 
 
     /**
-     * Affiche l'expression de la solution dans une fenêtre
+     * Affiche l'expression de la solution dans une fenÃªtre
      *
-     * @param expression, le tableau de caractères contenant l'expression de la solution
+     * @param expression, le tableau de caractÃ¨res contenant l'expression de la solution
      * @return aucun
      */
-    public static void afficherExpression(char[] expression ){
+    public static void afficherExpression(char[] expression, int[] tailleArray){
 
         String reponse = "";
         int compteur_espace = 0;
-
-        for(int i = 0; i < expression.length; i++){
+        
+        
+        for(int i = 0; i < tailleArray[0]; i++){
 
             if(expression[i] == ' '){
 
@@ -319,7 +320,7 @@ public class functions {
 
 
     /**
-     *Gère la fenêtre demandant à l'utilisateur s'il veut rejouer une partie
+     *GÃ¨re la fenÃªtre demandant Ã  l'utilisateur s'il veut rejouer une partie
      *
      * @return le choix de l'utilisateur (s'il veut rejouer ou non)
      */
@@ -331,7 +332,7 @@ public class functions {
             choix = JOptionPane.showInputDialog(null, "Voulez vous rejouer une partie?");
             choix.toLowerCase();
 
-        }while(!choix.contentEquals("o") && !choix.contentEquals("n"));
+        }while(!choix.contentEquals(OUI) && !choix.contentEquals(NON));
 
         return choix.charAt(0);
 
@@ -386,7 +387,7 @@ public class functions {
      * @param cible : Affiche la cible (le resultat a obtenir)
      * @param expression : Affiche l'expression du resultat une fois la cible attente
      */
-    public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression) {
+    public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression, int[] tailleArray) {
         int resultat  = 0;
         do {
             afficherEntete();
@@ -399,13 +400,13 @@ public class functions {
             }else {
                 JOptionPane.showMessageDialog(null, "Ce n'est pas le bon resultat");
             }
-        } while (resultat != QUITTER || resultat != cible);
+        } while (resultat != QUITTER && resultat != cible);
 
-        afficherExpression(expression);
+        afficherExpression(expression, tailleArray);
     }
 
 
-    public static int trouverCible(Nombre[] tab_num, int nbOperation, char[] expression) {
+    public static int trouverCible(Nombre[] tab_num, int nbOperation, int[] tailleArray, char[] expression) {
         int cible;
         int nombre_2;
         int compteurOperation = 0;
@@ -437,6 +438,7 @@ public class functions {
 
                 compteurOperation ++;
             }
+            tailleArray[0] = taille;
         }
         return cible;
     }
