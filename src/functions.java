@@ -316,6 +316,12 @@ public class functions {
 
     }
 
+    /**
+     * Interagit avec l'utilisateur lorsqu'il effectue ses operations et quitte lorsqu'il le demande
+     * @param tab_num tableau de Nombres
+     * @param nb_operations le nombre d'operation max a effectuer
+     * @return le resultat des operations
+     */
     public static int obtenirResultatValide(Nombre[] tab_num, int nb_operations) {
         initBoolen(tab_num);
         int iterator = 0;
