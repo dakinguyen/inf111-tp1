@@ -320,12 +320,8 @@ public class functions {
             } else {
                 resultat = -1;
             }
-
-
         }
-
         return resultat;
-
     }
     
 
