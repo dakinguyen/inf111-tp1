@@ -119,20 +119,21 @@ public class functions {
 
     public static int creerExpression(char[] expression, int taille, int operande1, char operateur, int operande2, int resultat) {
 
-        expression[0] = (char)(ASCII_ENTIER + operande1);
-        expression[1] = ' ';
-        expression[2] = operateur;
-        expression[3] = ' ';
-        expression[4] = (char)(ASCII_ENTIER + operande2);
-        expression[5] = ' ';
-        expression[6] = '=';
-        expression[7] = ' ';
+        expression[taille] = (char)(ASCII_ENTIER + operande1);
+        expression[taille+1] = ' ';
+        expression[taille+2] = operateur;
+        expression[taille+3] = ' ';
+        expression[taille+4] = (char)(ASCII_ENTIER + operande2);
+        expression[taille+5] = ' ';
+        expression[taille+6] = '=';
+        expression[taille+7] = ' ';
         String res = Integer.toString(resultat);
         for (int i=0; i< res.length(); i++) {
-            expression[8+i]= res.charAt(i);
+            expression[taille+7+i]= res.charAt(i);
         }
 
-        expression[8 + res.length()] = ' ';
+        expression[taille + 8 + res.length()] = ' ';
+        taille += taille + 8 + res.length();
 
         return taille;
     }
