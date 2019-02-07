@@ -287,6 +287,7 @@ public class functions {
 
         do{
             choix = JOptionPane.showInputDialog(null, "Voulez vous rejouer une partie?");
+            choix.toLowerCase();
 
         }while(!choix.contentEquals("o") && !choix.contentEquals("n"));
 
