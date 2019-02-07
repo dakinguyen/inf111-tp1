@@ -208,6 +208,15 @@ public class functions {
         return nombreEntree;
     }
 
+    
+    /**
+     * Afficher la présentation du problème à résoudre
+     * 
+     * @param nombre, tableau de nombres
+     * @param nbOperations, le nombre d'opérations obligatoires
+     * @param resultat, la valeur cible à obtenir
+     * @return aucun
+     */
     public static void afficherNombres(Nombre[] nombre, int nbOperations, int resultat){
 
         String tabNombre = "";
@@ -230,9 +239,11 @@ public class functions {
 
     }
 
+    
     /**
+     * Gère la fenêtre demandant à l'utilisateur d'entrer un opérateur et valide l'opérateur entré
      *
-     * @return operateur
+     * @return L'opérateur entré par l'utilisateur
      */
     public static char operateurValideClavier(){
 
@@ -247,9 +258,11 @@ public class functions {
         return operateur.charAt(0);
     }
 
-
+    
     /**
+     * Affiche la fenêtre d'accueil
      *
+     * @return aucun
      */
     public static void afficherEntete(){
 
@@ -264,8 +277,10 @@ public class functions {
 
 
     /**
+     * Affiche l'expression de la solution dans une fenêtre
      *
-     * @param expression
+     * @param expression, le tableau de caractères contenant l'expression de la solution
+     * @return aucun
      */
     public static void afficherExpression(char[] expression ){
 
@@ -297,10 +312,12 @@ public class functions {
                 reponse);
 
     }
-
+    
+    
     /**
+     *Gère la fenêtre demandant à l'utilisateur s'il veut rejouer une partie
      *
-     * @return choix
+     * @return le choix de l'utilisateur (s'il veut rejouer ou non)
      */
     public static char veutRejouer(){
 
