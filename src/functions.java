@@ -422,7 +422,6 @@ public class functions {
             
 			if (resultat!= -2) {
 				taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
-				System.out.println(expression);
 				cible = resultat;
 				
 				if (compteurOperation < nbOperation) {
