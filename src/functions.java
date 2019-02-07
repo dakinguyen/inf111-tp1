@@ -65,7 +65,7 @@ public class functions {
      */
     public static int nombreChoisiHasard(Nombre[] tab_num) {
 
-        int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length)].nombre;
+        int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length - 1)].nombre;
         return nombre;
     }
     
@@ -100,14 +100,17 @@ public class functions {
             case '+': resultat = nbChoisi1 + nbChoisi2;
                 break;
             case '-': resultat = nbChoisi1 - nbChoisi2;
+                if (resultat < 0) {
+            		return -2;
+            	}
                 break;
             case '*': resultat = nbChoisi1 * nbChoisi2;
                 break;
             case '/': resultat = nbChoisi1 / nbChoisi2;
                 if (nbChoisi1 % nbChoisi2 != 0)
-                    return -1;
+                    return -2;
                 break;
-            default: resultat = -1;
+            default: resultat = -2;
         }
 
         return resultat;
@@ -160,22 +163,20 @@ public class functions {
 
     public static int creerExpression(char[] expression, int taille, int operande1, char operateur, int operande2, int resultat) {
 
-        expression[taille] = (char)(ASCII_ENTIER + operande1);
-        expression[taille+1] = ' ';
-        expression[taille+2] = operateur;
-        expression[taille+3] = ' ';
-        expression[taille+4] = (char)(ASCII_ENTIER + operande2);
-        expression[taille+5] = ' ';
-        expression[taille+6] = '=';
-        expression[taille+7] = ' ';
-        String res = Integer.toString(resultat);
-        for (int i=0; i< res.length(); i++) {
-            expression[taille+7+i]= res.charAt(i);
-        }
-
-        expression[taille + 8 + res.length()] = ' ';
-        taille += taille + 8 + res.length();
-
+    	String op1 = "";
+    	op1 = String.valueOf(operande1);
+    	String op2 = "";
+    	op2 = String.valueOf(operande2);
+    	String operateurS = "";
+    	operateurS = String.valueOf(operateur);
+    	String resultatStr = "";
+    	resultatStr = String.valueOf(resultat);
+    	String expReturn = op1 + " " + operateurS + " " + op2 + " = " + resultatStr + " ";
+    	
+    	for (int i = 0; i < expReturn.length(); i ++) {
+    		expression[taille + i] = expReturn.charAt(i);
+    	}
+    	taille = taille + expReturn.length();
         return taille;
     }
 
@@ -398,4 +399,40 @@ public class functions {
     	
         afficherExpression(expression);
     }
+}
+
+	public static int trouverCible(Nombre[] tab_num, int nbOperation, char[] expression) {
+		int cible;
+		int nombre_2;
+		int compteurOperation = 0;
+		char operateur;
+		int resultat;
+		int taille = 0;
+		
+		cible = functions.nombreChoisiHasard(tab_num);
+		functions.ajusterNombreChoisi(cible, tab_num);
+		
+		// Choisir le 2e nombre, pas encore choisi
+		nombre_2 = functions.nombrePasDejaChoisi(tab_num);
+		functions.ajusterNombreChoisi(nombre_2, tab_num);
+		
+		while (compteurOperation < nbOperation) {
+			operateur = functions.operateurHasard();
+			resultat = functions.resultatOperation(cible, operateur, nombre_2);
+            
+			if (resultat!= -2) {
+				taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
+				System.out.println(expression);
+				cible = resultat;
+				
+				if (compteurOperation < nbOperation) {
+					nombre_2 = functions.nombrePasDejaChoisi(tab_num);
+					functions.ajusterNombreChoisi(nombre_2, tab_num);
+				}
+				
+				compteurOperation ++;
+			}
+		}
+		return cible;
+	}
 }
