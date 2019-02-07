@@ -310,6 +310,9 @@ public class functions {
 
     }
     
+    
+    
+    //Sous-programme de haut niveau
     public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression) {
     int resultat  = 0;
     
