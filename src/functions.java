@@ -351,7 +351,7 @@ public class functions {
 
 
     /**
-     * Cette fonction permet de jouer un tour, verifier si le nombre est valide et ce, tant que l'utilisateur ne trouve pas le bon resultat
+     * Cette fonction permet de jouer un tour, verifie si le nombre est valide et ce, tant que l'utilisateur ne trouve pas le bon resultat. Tant que l'utilisateur ne trouve pas le bon resultat, le jeu affiche un message d'echec, il affiche un message de reussite une fois le resultat trouve
      * @param tab : Affiche le tableau de nombres
      * @param nbOperation : Affiche le nombre d'operations
      * @param cible : Affiche la cible (le resultat a obtenir)
