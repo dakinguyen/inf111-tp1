@@ -68,7 +68,7 @@ public class functions {
         int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length - 1)].nombre;
         return nombre;
     }
-    
+
     /**
      * Il faut verifier si le nombre appartient au tableau et n'a pas encore ete choisi
      * @param nombre : nombre compare au tableau
@@ -101,8 +101,8 @@ public class functions {
                 break;
             case '-': resultat = nbChoisi1 - nbChoisi2;
                 if (resultat < 0) {
-            		return MATH_ERROR;
-            	}
+                    return MATH_ERROR;
+                }
                 break;
             case '*': resultat = nbChoisi1 * nbChoisi2;
                 break;
@@ -163,20 +163,20 @@ public class functions {
 
     public static int creerExpression(char[] expression, int taille, int operande1, char operateur, int operande2, int resultat) {
 
-    	String op1 = "";
-    	op1 = String.valueOf(operande1);
-    	String op2 = "";
-    	op2 = String.valueOf(operande2);
-    	String operateurS = "";
-    	operateurS = String.valueOf(operateur);
-    	String resultatStr = "";
-    	resultatStr = String.valueOf(resultat);
-    	String expReturn = op1 + " " + operateurS + " " + op2 + " = " + resultatStr + " ";
-    	
-    	for (int i = 0; i < expReturn.length(); i ++) {
-    		expression[taille + i] = expReturn.charAt(i);
-    	}
-    	taille = taille + expReturn.length();
+        String op1 = "";
+        op1 = String.valueOf(operande1);
+        String op2 = "";
+        op2 = String.valueOf(operande2);
+        String operateurS = "";
+        operateurS = String.valueOf(operateur);
+        String resultatStr = "";
+        resultatStr = String.valueOf(resultat);
+        String expReturn = op1 + " " + operateurS + " " + op2 + " = " + resultatStr + " ";
+
+        for (int i = 0; i < expReturn.length(); i ++) {
+            expression[taille + i] = expReturn.charAt(i);
+        }
+        taille = taille + expReturn.length();
         return taille;
     }
 
@@ -196,8 +196,9 @@ public class functions {
         int nombreEntree = 0;
 
         while (valide == 0) {
-            JOptionPane.showMessageDialog(null, "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num));
-            nombreEntree = scanner.nextInt();
+            nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,
+                    "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " +
+                            tabToString(tab_num)));
 
             if (nombreEntree == QUITTER) {
                 valide = 1;
@@ -211,10 +212,10 @@ public class functions {
         return nombreEntree;
     }
 
-    
+
     /**
      * Afficher la présentation du problème à résoudre
-     * 
+     *
      * @param nombre, tableau de nombres
      * @param nbOperations, le nombre d'opérations obligatoires
      * @param resultat, la valeur cible à obtenir
@@ -242,7 +243,7 @@ public class functions {
 
     }
 
-    
+
     /**
      * Gère la fenêtre demandant à l'utilisateur d'entrer un opérateur et valide l'opérateur entré
      *
@@ -261,7 +262,7 @@ public class functions {
         return operateur.charAt(0);
     }
 
-    
+
     /**
      * Affiche la fenêtre d'accueil
      *
@@ -315,8 +316,8 @@ public class functions {
                 reponse);
 
     }
-    
-    
+
+
     /**
      *Gère la fenêtre demandant à l'utilisateur s'il veut rejouer une partie
      *
@@ -346,7 +347,9 @@ public class functions {
         initBoolen(tab_num);
         int iterator = 0;
 
+
         int resultat = nombreValideClavier(tab_num);
+        System.out.println("3");
 
         if (resultat != QUITTER) {
             ajusterNombreChoisi(resultat, tab_num);
@@ -373,7 +376,7 @@ public class functions {
         }
         return resultat;
     }
-    
+
 
 
     /**
@@ -384,54 +387,57 @@ public class functions {
      * @param expression : Affiche l'expression du resultat une fois la cible attente
      */
     public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression) {
-    int resultat  = 0;
-    	do {
-    		afficherEntete();
-    		afficherNombres(tab, nbOperation, cible);
-    		resultat = obtenirResultatValide(tab, nbOperation);
-    	
+        int resultat  = 0;
+        do {
+            afficherEntete();
+            afficherNombres(tab, nbOperation, cible);
+            resultat = obtenirResultatValide(tab, nbOperation);
+
+
             if (resultat == cible) {
-    		JOptionPane.showMessageDialog(null, "Bravo !");
+                JOptionPane.showMessageDialog(null, "Bravo !");
             }else {
-    		    JOptionPane.showMessageDialog(null, "Ce n'est pas le bon resultat");
+                JOptionPane.showMessageDialog(null, "Ce n'est pas le bon resultat");
             }
-    	} while (resultat != QUITTER || resultat != cible);
-    	
+        } while (resultat != QUITTER || resultat != cible);
+
         afficherExpression(expression);
     }
-}
 
-	public static int trouverCible(Nombre[] tab_num, int nbOperation, char[] expression) {
-		int cible;
-		int nombre_2;
-		int compteurOperation = 0;
-		char operateur;
-		int resultat;
-		int taille = 0;
-		
-		cible = functions.nombreChoisiHasard(tab_num);
-		functions.ajusterNombreChoisi(cible, tab_num);
-		
-		// Choisir le 2e nombre, pas encore choisi
-		nombre_2 = functions.nombrePasDejaChoisi(tab_num);
-		functions.ajusterNombreChoisi(nombre_2, tab_num);
-		
-		while (compteurOperation < nbOperation) {
-			operateur = functions.operateurHasard();
-			resultat = functions.resultatOperation(cible, operateur, nombre_2);
-            
-			if (resultat!= MATH_ERROR) {
-				taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
-				cible = resultat;
-				
-				if (compteurOperation < nbOperation) {
-					nombre_2 = functions.nombrePasDejaChoisi(tab_num);
-					functions.ajusterNombreChoisi(nombre_2, tab_num);
-				}
-				
-				compteurOperation ++;
-			}
-		}
-		return cible;
-	}
+
+    public static int trouverCible(Nombre[] tab_num, int nbOperation, char[] expression) {
+        int cible;
+        int nombre_2;
+        int compteurOperation = 0;
+        char operateur;
+        int resultat;
+        int taille = 0;
+
+        cible = functions.nombreChoisiHasard(tab_num);
+        functions.ajusterNombreChoisi(cible, tab_num);
+
+
+        // Choisir le 2e nombre, pas encore choisi
+        nombre_2 = functions.nombrePasDejaChoisi(tab_num);
+        functions.ajusterNombreChoisi(nombre_2, tab_num);
+
+
+        while (compteurOperation < nbOperation) {
+            operateur = functions.operateurHasard();
+            resultat = functions.resultatOperation(cible, operateur, nombre_2);
+
+            if (resultat!= MATH_ERROR) {
+                taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
+                cible = resultat;
+
+                if (compteurOperation < nbOperation) {
+                    nombre_2 = functions.nombrePasDejaChoisi(tab_num);
+                    functions.ajusterNombreChoisi(nombre_2, tab_num);
+                }
+
+                compteurOperation ++;
+            }
+        }
+        return cible;
+    }
 }
