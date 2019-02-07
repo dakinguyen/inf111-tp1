@@ -18,7 +18,7 @@ public class functions {
             tab_num[i] = new Nombre();
             tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,10);
             tab_num[i].choisi = false;
-            JOptionPane.showMessageDialog(null, tab_num[i].nombre);
+            System.out.println(tab_num[i].nombre);
         }
 
     }
@@ -40,14 +40,14 @@ public class functions {
     public static char operateurHasard(){
         char[] operators = {'+', '-', '*', '/'};
         char ops = operators[UtilitaireFonctionsMath.alea(0,3)];
-        JOptionPane.showMessageDialog(null, ops);
+        System.out.println(ops);
         return  ops;
     }
 
     public static int nombreChoisiHasard(Nombre[] tab_num) {
 
         int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length)].nombre;
-        JOptionPane.showMessageDialog(null, nombre);
+        System.out.println(nombre);
         return nombre;
     }
 
