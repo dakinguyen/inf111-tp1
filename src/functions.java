@@ -18,7 +18,7 @@ public class functions {
             tab_num[i] = new Nombre();
             tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,10);
             tab_num[i].choisi = false;
-            System.out.println(tab_num[i].nombre);
+            JOptionPane.showMessageDialog(null, tab_num[i].nombre);
         }
 
     }
@@ -40,14 +40,14 @@ public class functions {
     public static char operateurHasard(){
         char[] operators = {'+', '-', '*', '/'};
         char ops = operators[UtilitaireFonctionsMath.alea(0,3)];
-        System.out.println(ops);
+        JOptionPane.showMessageDialog(null, ops);
         return  ops;
     }
 
     public static int nombreChoisiHasard(Nombre[] tab_num) {
 
         int nombre = tab_num[UtilitaireFonctionsMath.alea(0,tab_num.length)].nombre;
-        System.out.println(nombre);
+        JOptionPane.showMessageDialog(null, nombre);
         return nombre;
     }
 
@@ -154,7 +154,7 @@ public class functions {
         int nombreEntree = 0;
 
         while (valide == 0) {
-            System.out.print("Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num));
+            JOptionPane.showMessageDialog(null, "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num));
             nombreEntree = scanner.nextInt();
 
             if (nombreEntree == -1) {
