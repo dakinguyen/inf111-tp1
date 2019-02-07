@@ -101,16 +101,16 @@ public class functions {
                 break;
             case '-': resultat = nbChoisi1 - nbChoisi2;
                 if (resultat < 0) {
-            		return -2;
+            		return MATH_ERROR;
             	}
                 break;
             case '*': resultat = nbChoisi1 * nbChoisi2;
                 break;
             case '/': resultat = nbChoisi1 / nbChoisi2;
                 if (nbChoisi1 % nbChoisi2 != 0)
-                    return -2;
+                    return MATH_ERROR;
                 break;
-            default: resultat = -2;
+            default: resultat = MATH_ERROR;
         }
 
         return resultat;
@@ -199,7 +199,7 @@ public class functions {
             JOptionPane.showMessageDialog(null, "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num));
             nombreEntree = scanner.nextInt();
 
-            if (nombreEntree == -1) {
+            if (nombreEntree == QUITTER) {
                 valide = 1;
             }
 
@@ -348,27 +348,27 @@ public class functions {
 
         int resultat = nombreValideClavier(tab_num);
 
-        if (resultat != -1) {
+        if (resultat != QUITTER) {
             ajusterNombreChoisi(resultat, tab_num);
         }
 
-        while (resultat !=-1 && iterator < nb_operations) {
+        while (resultat !=QUITTER && iterator < nb_operations) {
             char operator = operateurValideClavier();
 
             if (operator != '=') {
                 do {
                     int deuxieme = nombreValideClavier(tab_num);
 
-                    if (deuxieme != -1) {
+                    if (deuxieme != QUITTER) {
                         ajusterNombreChoisi(deuxieme, tab_num);
                         resultat = resultatOperation(resultat, operator, deuxieme);
                     } else {
-                        resultat = -1;
+                        resultat = QUITTER;
                     }
-                } while (resultat == -2);
+                } while (resultat == MATH_ERROR);
                 iterator++;
             } else {
-                resultat = -1;
+                resultat = QUITTER;
             }
         }
         return resultat;
@@ -395,7 +395,7 @@ public class functions {
             }else {
     		    JOptionPane.showMessageDialog(null, "Ce n'est pas le bon resultat");
             }
-    	} while (resultat != -1 || resultat != cible);
+    	} while (resultat != QUITTER || resultat != cible);
     	
         afficherExpression(expression);
     }
@@ -420,7 +420,7 @@ public class functions {
 			operateur = functions.operateurHasard();
 			resultat = functions.resultatOperation(cible, operateur, nombre_2);
             
-			if (resultat!= -2) {
+			if (resultat!= MATH_ERROR) {
 				taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
 				cible = resultat;
 				
