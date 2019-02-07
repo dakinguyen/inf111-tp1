@@ -309,4 +309,24 @@ public class functions {
         return resultat;
 
     }
+    
+    public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression) {
+    int resultat  = 0;
+    
+    	do {
+    		afficherEntete();
+    	
+    		afficherNombres(tab, nbOperation, cible);
+    	
+    		resultat = obtenirResultatValide(tab, nbOperation);
+    	
+    	if (resultat == cible)
+    		JOptionPane.showMessageDialog(null, "Bravo !");
+    	else 
+    		JOptionPane.showMessageDialog(null, "Ce n'est pas le bon resultat");
+    	
+    	} while (resultat != -1 || resultat != cible);
+    	
+    	afficherExpression(expression);
+    }
 }
