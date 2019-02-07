@@ -21,9 +21,7 @@ public class functions {
             tab_num[i] = new Nombre();
             tab_num[i].nombre = UtilitaireFonctionsMath.alea(1,9);
             tab_num[i].choisi = false;
-
         }
-
     }
 
     /**
