@@ -29,21 +29,21 @@ public class ProgrammePrincipale {
         while (rejouer == 'o') {
         	
         	// Initialisation de du tableau de Nombres et du tableau d'expression
-            functions.initExpression(expression);
-            functions.genererNombres(tab_num);
-            functions.initBoolen(tab_num);
+            Functions.initExpression(expression);
+            Functions.genererNombres(tab_num);
+            Functions.initBoolen(tab_num);
 
             // Trouver le nombre d'operations qui se fera
             int nbOperations = UtilitaireFonctionsMath.alea(1,5);
 
             // Trouver la cible
-            int cible = functions.trouverCible(tab_num, nbOperations, tailleArray, expression);
+            int cible = Functions.trouverCible(tab_num, nbOperations, tailleArray, expression);
 
             // L'utilisateur effectue son tour
-            functions.effectuerTour(tab_num, nbOperations, cible, expression, tailleArray);
+            Functions.effectuerTour(tab_num, nbOperations, cible, expression, tailleArray);
 
             // Demande si l'utilisateur veut rejouer
-            rejouer = functions.veutRejouer();
+            rejouer = Functions.veutRejouer();
 
         }
         
