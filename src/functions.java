@@ -1,5 +1,13 @@
 import javax.swing.*;
 
+
+/**
+ * Regroupe les sous-programmes de bas-niveau et de haut-niveau (sauf le programme principal). 
+ * 
+ * @author Dat Quang Nguyen, Sara Nguyen, Emerick Paul, Gabriel Somma
+ * @version Hiver 2019
+ *
+ */
 public class functions {
     public static final int QUITTER = -1;
     public static final int MATH_ERROR = -2;
