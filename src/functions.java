@@ -411,6 +411,8 @@ public class functions {
                     } else {
                         resultat = QUITTER;
                     }
+                    //On verifie ici si l'operation ne donne
+                    //pas un chiffre negatif ou un chiffre a virgule comme resultat
                 } while (resultat == MATH_ERROR);
                 iterator++;
             } else {
