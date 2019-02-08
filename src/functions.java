@@ -12,6 +12,8 @@ public class functions {
     public static final int QUITTER = -1;
     public static final int MATH_ERROR = -2;
     public static final int ASCII_ENTIER = 48;
+    public static final int VALIDE = 1;
+    public static final int NON_VALIDE = 0;
     public static final String OUI = "o";
     public static final String NON = "n";
 
@@ -247,12 +249,12 @@ public class functions {
      */
     public static int nombreValideClavier(Nombre[] tab_num) {
 
-        int valide = 0;
-        int nombreEntree = 0;
+        int valide = NON_VALIDE;
+        int nombreEntree = NON_VALIDE;
 
         // Tant que le nombreEntree n'est pas valide, on redemande a l'utilisateur d'entrer
         // des valeurs
-        while (valide == 0) {
+        while (valide == NON_VALIDE) {
             try {
                 nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,
                         "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num))).intValue();
@@ -261,11 +263,11 @@ public class functions {
                 JOptionPane.showMessageDialog(null, "SVP entrez un chiffre!");
             }
             if (nombreEntree == QUITTER) {
-                valide = 1;
+                valide = VALIDE;
             }
 
             if(nombreExiste(nombreEntree, tab_num)){
-                valide = 1;
+                valide = VALIDE;
             }
         }
 
