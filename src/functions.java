@@ -291,7 +291,7 @@ public class functions {
                         "\tListe des nombres\n" +
                         "------------\n" +
                         tabNombre +
-                        "\nNombre d'opÃ©rations obligatoires: " +
+                        "\nNombre d'operations obligatoires: " +
                         nbOperations +
                         "\nLa cible est: " +
                         resultat);
@@ -312,7 +312,7 @@ public class functions {
         //Demander d'entrer un operateur tant que celui entre n'est pas valide
         do{
 
-            operateur = JOptionPane.showInputDialog(null, "Entrez un opÃ©rateur (+,-,*,/ ou = pour annuler)");
+            operateur = JOptionPane.showInputDialog(null, "Entrez un operateur (+,-,*,/ ou = pour annuler)");
 
         }while(!operateur.contentEquals("+") && !operateur.contentEquals("-") && !operateur.contentEquals("*") && !operateur.contentEquals("/") && !operateur.contentEquals("="));
 
@@ -329,7 +329,7 @@ public class functions {
     public static void afficherEntete(){
 
         JOptionPane.showMessageDialog(null,
-                "Le jeu consiste a trouver une valeur cible en utilisant un nombre d'operations fixe a  l'avance et une liste de nombres fournie.\n\n\n" +
+                "Le jeu consiste a trouver une valeur cible en utilisant un nombre d'operations fixe a l'avance et une liste de nombres fournie.\n\n\n" +
                         "-Un nombre peut se repeter dans la liste fournie + \n" +
                         "-Les seules operations permises sont: + - * et /\n" +
                         "-Un nombre de la liste ne peut etre utilise qu'une fois dans la solution\n" +
