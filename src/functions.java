@@ -235,8 +235,13 @@ public class functions {
         // Tant que le nombreEntree n'est pas valide, on redemande a l'utilisateur d'entrer
         // des valeurs
         while (valide == 0) {
-            nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,"Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " +tabToString(tab_num))).intValue();
-
+            try {
+                nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,
+                        "Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " + tabToString(tab_num))).intValue();
+            }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "SVP entrez un chiffre!");
+            }
             if (nombreEntree == QUITTER) {
                 valide = 1;
             }
