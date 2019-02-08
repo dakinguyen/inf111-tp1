@@ -8,7 +8,7 @@ import javax.swing.*;
  * @version Hiver 2019
  *
  */
-public class functions {
+public class Functions {
     public static final int QUITTER = -1;
     public static final int MATH_ERROR = -2;
     public static final int ASCII_ENTIER = 48;
@@ -490,31 +490,31 @@ public class functions {
         int taille = 0;
 
         // Prendre un nombre aleatoire dans le tableau de Nombre et mettre le boleen a true (choisi)
-        cible = functions.nombreChoisiHasard(tab_num);
-        functions.ajusterNombreChoisi(cible, tab_num);
+        cible = nombreChoisiHasard(tab_num);
+        ajusterNombreChoisi(cible, tab_num);
 
 
         // Choisir un 2e nombre qui n'a pas encore ete choisi
-        nombre_2 = functions.nombrePasDejaChoisi(tab_num);
-        functions.ajusterNombreChoisi(nombre_2, tab_num);
+        nombre_2 = nombrePasDejaChoisi(tab_num);
+        ajusterNombreChoisi(nombre_2, tab_num);
 
         // Tant que le nombre d'operations n'a pas ete atteint, on continue la boucle
         while (compteurOperation < nbOperation) {
         	// Choisir au hasard un operateur
-            operateur = functions.operateurHasard();
+            operateur = operateurHasard();
             // Trouver le resultat de l'operation
-            resultat = functions.resultatOperation(cible, operateur, nombre_2);
+            resultat = resultatOperation(cible, operateur, nombre_2);
            
             // Si l'operation est bonne
             if (resultat!= MATH_ERROR) {
-                taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
+                taille = creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
                 // On met la cible egal au resultat
                 cible = resultat;
                 
                 // Si le nombre d'operation n'a pas ete atteint, on trouve un 2e nombre
                 if (compteurOperation < nbOperation) {
-                    nombre_2 = functions.nombrePasDejaChoisi(tab_num);
-                    functions.ajusterNombreChoisi(nombre_2, tab_num);
+                    nombre_2 = nombrePasDejaChoisi(tab_num);
+                    ajusterNombreChoisi(nombre_2, tab_num);
                 }
                 // Incrementation du compteur d'operation
                 compteurOperation ++;
