@@ -151,10 +151,17 @@ public class functions {
         return nombre;
     }
 
+    /**
+     * La fonction peremet de rajouter une chaine de caractere a la fin d'un tableau de caractere
+     * et retourne la taille du tableau de caractere.
+     * @param charArray : Un tableau de caractere
+     * @param taille : Le nombre de caractere dans le tableau de caractere
+     * @param charString : Une chaine de caractere a ajouter dans le tableau de caractere
+     * @return taille : La taille du tableau de caractere
+     */
     public static int concatenerNombre(char[] charArray, int taille, String charString) {
 
-        charArray[taille-1] = ' ';
-
+    	// mettre les chracteres du String dans le tableau de char en ordre
         for (int i = 0; i < charString.length(); i++) {
             charArray[taille] = charString.charAt(i);
             taille += 1;
@@ -163,28 +170,48 @@ public class functions {
         return taille;
     }
 
+    /**
+     * La fonction permet de creer l'expression de l'operation faite et de le mettre
+     * dans un tableau de caractere. Elle retourne la taille de celle-ci.
+     * @param expression : Un tableau qui contient les equations
+     * @param taille : Le nombre de caracteres entree dans le tableau d'expression
+     * @param operande1 : Le premiere chiffre du calcul
+     * @param operateur : Le caractere de l'operateur
+     * @param operande2 : Le deuxieme chiffre du calcul
+     * @param resultat : Le resultat du calcul
+     * @return taille : La taille finale du tableau d'expression
+     */
     public static int creerExpression(char[] expression, int taille, int operande1, char operateur, int operande2, int resultat) {
 
-        String op1 = "";
+    	// Creation du String d'expression
+        String op1 = "";       
+        // Transformation de la valeur de l'operande1 en String
         op1 = String.valueOf(operande1);
         String op2 = "";
+        // Transformation de la valeur de l'operande2 en String
         op2 = String.valueOf(operande2);
         String operateurS = "";
+        // Transformation du char de l'operande2 en String
         operateurS = String.valueOf(operateur);
         String resultatStr = "";
+        // Transformation de la valeur du resultat en String
         resultatStr = String.valueOf(resultat);
         String expReturn = op1 + " " + operateurS + " " + op2 + " = " + resultatStr + " ";
 
-        for (int i = 0; i < expReturn.length(); i ++) {
-            expression[taille + i] = expReturn.charAt(i);
-        }
-        taille = taille + expReturn.length();
+        // Mettre le String a la fin du tableau de caractere d'expression
+        taille = concatenerNombre(expression, taille, expReturn);
         return taille;
     }
 
+    /**
+     * Transforme le tableau de Nombres en une chaine de caractere et retourne celle-ci
+     * @param tab_num : Le tableau de Nombres
+     * @return String qui contient les nombres dans le tableau de Nombre
+     */
     public static String tabToString(Nombre[] tab_num) {
 
         String str = "";
+        // Mettre chaque valeur du tableau de Nombre dans le String suivant d'un espace
         for(int i =0; i < tab_num.length; i++) {
             str += tab_num[i].nombre;
             str += " ";
@@ -192,11 +219,21 @@ public class functions {
 
         return str;
     }
+    
+    /**
+     * Demande a l'utilisateur d'entrer un Nombre et permet de valider si
+     * le nombre entre n'est pas encore utilise. Retourne cette valeur si 
+     * elle est valide.
+     * @param tab_num : Le tableau de Nombres
+     * @return Le nombre entre par l'utilisateur
+     */
     public static int nombreValideClavier(Nombre[] tab_num) {
 
         int valide = 0;
         int nombreEntree = 0;
 
+        // Tant que le nombreEntree n'est pas valide, on redemande a l'utilisateur d'entrer
+        // des valeurs
         while (valide == 0) {
             nombreEntree = Integer.valueOf(JOptionPane.showInputDialog(null,"Entrer un nombre existant dans la liste et non deja utilise ou -1 pour annuler: " +tabToString(tab_num))).intValue();
 
@@ -214,11 +251,11 @@ public class functions {
 
 
     /**
-     * Afficher la prÃ©sentation du problÃ¨me Ã  rÃ©soudre
+     * Afficher la presentation du probleme a resoudre
      *
      * @param nombre, tableau de nombres
-     * @param nbOperations, le nombre d'opÃ©rations obligatoires
-     * @param resultat, la valeur cible Ã  obtenir
+     * @param nbOperations, le nombre d'operations obligatoires
+     * @param resultat, la valeur cible a obtenir
      * @return aucun
      */
     public static void afficherNombres(Nombre[] nombre, int nbOperations, int resultat){
@@ -233,7 +270,7 @@ public class functions {
 
         
         
-        Pane.showMessageDialog(null,
+        JOptionPane.showMessageDialog(null,
                 "------------\n" +
                         "\tListe des nombres\n" +
                         "------------\n" +
@@ -247,9 +284,9 @@ public class functions {
 
 
     /**
-     * GÃ¨re la fenÃªtre demandant Ã  l'utilisateur d'entrer un opÃ©rateur et valide l'opÃ©rateur entrÃ©
+     * Gere la fenetre demandant a l'utilisateur d'entrer un operateur et valide l'operateur entre
      *
-     * @return L'opÃ©rateur entrÃ© par l'utilisateur
+     * @return L'operateur entre par l'utilisateur
      */
     public static char operateurValideClavier(){
 
@@ -266,7 +303,7 @@ public class functions {
 
 
     /**
-     * Affiche la fenÃªtre d'accueil
+     * Affiche la fenetre d'accueil
      *
      * @return aucun
      */
@@ -283,9 +320,9 @@ public class functions {
 
 
     /**
-     * Affiche l'expression de la solution dans une fenÃªtre
+     * Affiche l'expression de la solution dans une fenetre
      *
-     * @param expression, le tableau de caractÃ¨res contenant l'expression de la solution
+     * @param expression, le tableau de caracteres contenant l'expression de la solution
      * @return aucun
      */
     public static void afficherExpression(char[] expression, int[] tailleArray){
@@ -322,7 +359,7 @@ public class functions {
 
 
     /**
-     *GÃ¨re la fenÃªtre demandant Ã  l'utilisateur s'il veut rejouer une partie
+     *Gere la fenetre demandant a l'utilisateur s'il veut rejouer une partie
      *
      * @return le choix de l'utilisateur (s'il veut rejouer ou non)
      */
@@ -350,9 +387,7 @@ public class functions {
         initBoolen(tab_num);
         int iterator = 0;
 
-
         int resultat = nombreValideClavier(tab_num);
-        System.out.println("3");
 
         if (resultat != QUITTER) {
             ajusterNombreChoisi(resultat, tab_num);
@@ -383,11 +418,13 @@ public class functions {
 
 
     /**
+     * 
      * Cette fonction permet de jouer un tour, verifie si le nombre est valide et ce, tant que l'utilisateur ne trouve pas le bon resultat. Tant que l'utilisateur ne trouve pas le bon resultat, le jeu affiche un message d'echec, il affiche un message de reussite une fois le resultat trouve
      * @param tab : Affiche le tableau de nombres
      * @param nbOperation : Affiche le nombre d'operations
      * @param cible : Affiche la cible (le resultat a obtenir)
      * @param expression : Affiche l'expression du resultat une fois la cible attente
+     * @param tailleArray : Le tableau qui contient la taille du tableau de caractere de l'expression
      */
     public static void effectuerTour (Nombre[] tab, int nbOperation, int cible, char[] expression, int[] tailleArray) {
         int resultat  = 0;
@@ -408,38 +445,54 @@ public class functions {
     }
 
 
+    /**
+     * 
+     * @param tab_num : Le tableau de Nombres
+     * @param nbOperation : Le nombre d'operations
+     * @param tailleArray : Le tableau qui contient le nombre de caractere dans le tableau d'expression
+     * @param expression : Le tableau qui contient les expressions
+     * @return
+     */
     public static int trouverCible(Nombre[] tab_num, int nbOperation, int[] tailleArray, char[] expression) {
-        int cible;
+    	// Definition des variables
+    	int cible;
         int nombre_2;
         int compteurOperation = 0;
         char operateur;
         int resultat;
         int taille = 0;
 
+        // Prendre un nombre aleatoire dans le tableau de Nombre et mettre le boleen a true (choisi)
         cible = functions.nombreChoisiHasard(tab_num);
         functions.ajusterNombreChoisi(cible, tab_num);
 
 
-        // Choisir le 2e nombre, pas encore choisi
+        // Choisir un 2e nombre qui n'a pas encore ete choisi
         nombre_2 = functions.nombrePasDejaChoisi(tab_num);
         functions.ajusterNombreChoisi(nombre_2, tab_num);
 
-
+        // Tant que le nombre d'operations n'a pas ete atteint, on continue la boucle
         while (compteurOperation < nbOperation) {
+        	// Choisir au hasard un operateur
             operateur = functions.operateurHasard();
+            // Trouver le resultat de l'operation
             resultat = functions.resultatOperation(cible, operateur, nombre_2);
-
+           
+            // Si l'operation est bonne
             if (resultat!= MATH_ERROR) {
                 taille = functions.creerExpression(expression, taille, cible, operateur, nombre_2, resultat);
+                // On met la cible egal au resultat
                 cible = resultat;
-
+                
+                // Si le nombre d'operation n'a pas ete atteint, on trouve un 2e nombre
                 if (compteurOperation < nbOperation) {
                     nombre_2 = functions.nombrePasDejaChoisi(tab_num);
                     functions.ajusterNombreChoisi(nombre_2, tab_num);
                 }
-
+                // Incrementation du compteur d'operation
                 compteurOperation ++;
             }
+            // Mettre la valeur de la taille dans le tableau
             tailleArray[0] = taille;
         }
         return cible;
