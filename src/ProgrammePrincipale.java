@@ -1,9 +1,22 @@
 import javax.swing.*;
 
+/**
+ * Le programme principal du projet.
+ * 
+ * @author Dat Quang Nguyen, Sara Nguyen, Emerick Paul, Gabriel Somma
+ * @version Hiver 2019
+ *
+ */
 public class ProgrammePrincipale {
     public static final int TAILLE_CHAR = 500;
     public static final int TAILLE_NOMBRE = 6;
 
+    /**
+     * Boucle qui s'execute tant que le joueur veut continuer a jouer, assumant qu'au depart, le joueur veut jouer au moins une partie..
+     * 
+     * @param args
+     * @return aucun
+     */
     static public void main(String[] args){
 
     	// Definir les variables qui servira de contenir les nombres et les expressions du jeu
