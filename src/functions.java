@@ -4,10 +4,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class functions {
-    static Scanner scanner = new Scanner(System.in);
-    static JFrame frame = new JFrame();
-    public static final int TAILLE_CHAR = 20;
-    public static final int TAILLE_NOMBRE = 6;
     public static final int QUITTER = -1;
     public static final int MATH_ERROR = -2;
     private static Random rand = new Random(System.currentTimeMillis());
