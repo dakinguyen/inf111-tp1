@@ -231,7 +231,9 @@ public class functions {
 
         }
 
-        JOptionPane.showMessageDialog(null,
+        
+        
+        Pane.showMessageDialog(null,
                 "------------\n" +
                         "\tListe des nombres\n" +
                         "------------\n" +
@@ -271,11 +273,11 @@ public class functions {
     public static void afficherEntete(){
 
         JOptionPane.showMessageDialog(null,
-                "Le jeu consiste Ã  trouver une valeur cible en utilisant un nombre d'opÃ©rations fixÃ© Ã  l'avance et une liste de nombres fournie.\n\n\n" +
-                        "-Un nombre peut se rÃ©pÃ©ter dans la liste fournie + \n" +
-                        "-Les seules opÃ©rations permises sont: + - * et /\n" +
-                        "-Un nombre de la liste ne peut Ãªtre utilisÃ© qu'une fois dans la solution\n" +
-                        "-En tout temps la valeur -1 annule l'opÃ©ration en cours");
+                "Le jeu consiste a trouver une valeur cible en utilisant un nombre d'operations fixe a  l'avance et une liste de nombres fournie.\n\n\n" +
+                        "-Un nombre peut se repeter dans la liste fournie + \n" +
+                        "-Les seules operations permises sont: + - * et /\n" +
+                        "-Un nombre de la liste ne peut etre utilise qu'une fois dans la solution\n" +
+                        "-En tout temps la valeur -1 annule l'operation en cours");
 
     }
 
