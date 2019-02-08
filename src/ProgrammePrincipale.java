@@ -25,6 +25,6 @@ public class ProgrammePrincipale {
 
         }
 
-        JOptionPane.showMessageDialog(null, "Merci d'avoir jouÃ©!");
+        JOptionPane.showMessageDialog(null, "Merci d'avoir joue!");
     }
 }
